@@ -2,9 +2,15 @@ package org.openmrs.module.mdrtbinventory.db;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.openmrs.Location;
 import org.openmrs.api.db.DAOException;
+import org.openmrs.module.mdrtbinventory.InventoryDrugFacility;
+
+import java.util.List;
 
 /**
  * Created by Dennys Henry
@@ -26,4 +32,25 @@ public class HibernateMdrtbInventoryServiceDAO
     }
 
 
+    @Override
+    public InventoryDrugFacility getFacilityDrug(Integer id) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugFacility.class);
+        criteria.add(Restrictions.eq("id", id));
+
+        return  (InventoryDrugFacility) criteria.uniqueResult();
+    }
+
+    @Override
+    public List<InventoryDrugFacility> getFacilityDrug(List<Location> locations) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugFacility.class);
+        criteria.add(Restrictions.eq("voided", false));
+        criteria.add(Restrictions.in("location", locations));
+
+        return criteria.list();
+    }
+
+    @Override
+    public InventoryDrugFacility saveFacilityDrug(InventoryDrugFacility drug) {
+        return (InventoryDrugFacility)getSession().merge(drug);
+    }
 }
