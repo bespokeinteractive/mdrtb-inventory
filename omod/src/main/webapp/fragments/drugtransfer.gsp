@@ -4,7 +4,7 @@
         <div class="info-header">
             <i class="icon-book"></i>
             <h3 class="name">MANAGE ORDERS</h3>
-            <input id="drugName" type="text" value="" name="drugName" placeholder="Filter Requests" style="width:78%; margin:-40px 5px 0px 10px; padding:0px 15px;">
+
         </div>
     </div>
 </div>

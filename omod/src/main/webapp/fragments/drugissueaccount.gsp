@@ -4,7 +4,7 @@
         <div class="info-header">
             <i class="icon-list-ul"></i>
             <h3 class="name">ISSUE DRUGS</h3>
-            <input id="drugName" type="text" value="" name="drugName" placeholder="Filter Requests" style="width:78%; margin:-40px 5px 0px 10px; padding:0px 15px;">
+
         </div>
     </div>
 </div>

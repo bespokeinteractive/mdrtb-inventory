@@ -5,14 +5,15 @@
         <div class="info-header">
             <i class="icon-folder-open"></i>
             <h3 class="name">VIEW DRUGS</h3>
+            <div style="float:right;margin:-40px 5px 0px 10px; padding:0px 15px;">
+                <i class="icon-filter" style="font-size: 26px ; color: #5b57a6" ></i>
+                <label for="stockCategoryId" style="color: #f26522;">Category</label>
+                <select id = "stockCategoryId" style="width: 200px" name = "stockCategoryId"> </select>
+                <label for="drugStockName" style="color: #f26522;">&nbsp;&nbsp; Name </label>
+                <input id = "drugStockName" type="text" value name = "drugStockName" placeholder="Drug Name" >
+            </div>
         </div>
-        <div style="padding-left: 50px; margin-top: 7px">
-        <i class="icon-filter" style="font-size: 26px ; color: #5b57a6" ></i>
-        <label for="stockCategoryId" style="color: #f26522;">Category</label>
-            <select id = "stockCategoryId" style="width: 200px" name = "stockCategoryId"> </select>
-            <label for="drugStockName" style="color: #f26522;">&nbsp;&nbsp; Name </label>
-            <input id = "drugStockName" type="text" value name = "drugStockName" placeholder="Drug Name" >
-        </div>
+
     </div>
     </div>
 
