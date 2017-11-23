@@ -2,6 +2,7 @@ package org.openmrs.module.mdrtbinventory.api;
 
 import org.openmrs.Location;
 import org.openmrs.api.impl.BaseOpenmrsService;
+import org.openmrs.module.mdrtbinventory.InventoryDrugCategory;
 import org.openmrs.module.mdrtbinventory.InventoryDrugFacility;
 import org.openmrs.module.mdrtbinventory.db.MdrtbInventoryServiceDAO;
 
@@ -31,12 +32,17 @@ public class MdrtbInventoryServiceImpl
     }
 
     @Override
-    public List<InventoryDrugFacility> getFacilityDrug(List<Location> locations) {
-        return dao.getFacilityDrug(locations);
+    public List<InventoryDrugFacility> getFacilityDrugs(List<Location> locations) {
+        return dao.getFacilityDrugs(locations);
     }
 
     @Override
     public InventoryDrugFacility saveFacilityDrug(InventoryDrugFacility drug) {
         return dao.saveFacilityDrug(drug);
+    }
+
+    @Override
+    public List<InventoryDrugCategory> getInventoryDrugCategories() {
+        return dao.getInventoryDrugCategories();
     }
 }

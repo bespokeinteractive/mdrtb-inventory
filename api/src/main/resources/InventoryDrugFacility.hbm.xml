@@ -12,7 +12,7 @@
 		<many-to-one name="drug" class="org.openmrs.module.mdrtbinventory.InventoryDrug" column="inventory_drug" cascade="none" lazy="false" />
 		<many-to-one name="location" class="org.openmrs.Location" column="location_id" cascade="none" lazy="false" />
 		<property name="available" column="available"  type="java.lang.Double" />
-		<property name="reorder" column="acquired_cost"  type="java.lang.Double" />
+		<property name="reorder" column="reorder_level"  type="java.lang.Double" />
 
 		<property name="createdOn" column="created_on" type="java.util.Date" />
 		<many-to-one name="createdBy" class="org.openmrs.User" column="created_by" cascade="none" lazy="false" />

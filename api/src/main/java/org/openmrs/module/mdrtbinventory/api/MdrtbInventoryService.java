@@ -2,6 +2,7 @@ package org.openmrs.module.mdrtbinventory.api;
 
 import org.openmrs.Location;
 import org.openmrs.api.OpenmrsService;
+import org.openmrs.module.mdrtbinventory.InventoryDrugCategory;
 import org.openmrs.module.mdrtbinventory.InventoryDrugFacility;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +16,11 @@ import java.util.List;
 @Transactional
 public interface MdrtbInventoryService
         extends OpenmrsService {
+    //DrugFacility
     InventoryDrugFacility getFacilityDrug(Integer id);
-    List<InventoryDrugFacility> getFacilityDrug(List<Location> locations);
+    List<InventoryDrugFacility> getFacilityDrugs(List<Location> locations);
     InventoryDrugFacility saveFacilityDrug(InventoryDrugFacility drug);
+
+    //Categories
+    List<InventoryDrugCategory> getInventoryDrugCategories();
 }

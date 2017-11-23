@@ -2,11 +2,27 @@
 	ui.decorateWith("appui", "standardEmrPage", [title: "Inventory Dashboard"])
 	ui.includeCss("uicommons", "datatables/dataTables_jui.css")
 	ui.includeJavascript("mdrtbregistration", "jq.dataTables.min.js")
+	ui.includeJavascript("mdrtbdashboard", "moment.js")
 %>
+
 <script>
+	var refreshInTable = function (resultData, dTable) {
+        var rowCount = resultData.length;
+        if (rowCount == 0) {
+            dTable.find('td.dataTables_empty').html("No Records Found");
+        }
+        dTable.fnPageChange(0);
+    };
+
+    var isTableEmpty = function (resultData, dTable) {
+        if (resultData.length > 0) {
+            return false
+        }
+        return !dTable || dTable.fnGetNodes().length == 0;
+    };
+	
 	jq(function () {
 		jq("#tabs").tabs();
-		
 		
 		jq('#inline-tabs li').click(function(){			
 			if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'receipts'){
@@ -16,6 +32,15 @@
 				jq('.add-receipts').hide(100);
 			}
 		}).click();
+		
+		jq('#locations').click(function(){
+			if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'stock'){
+				getDrugStockList();
+			}
+			else{
+				//Other Pages/Functions
+			}
+		});
 		
 		jq('.add-receipts').click(function(){
 			window.location.href = (emr.pageLink('inventoryapp','addReceiptsToGeneralStore'));
@@ -31,15 +56,6 @@
     .col1, .col2, .col3, .col4, .col5, .col6, .col7, .col8, .col9, .col10, .col11, .col12 {
         color: #555;
         text-align: left;
-    }
-
-    form input,
-    form select {
-        margin: 0px;
-        display: inline-block;
-        min-width: 50px;
-        padding: 2px 10px;
-        height: 32px !important;
     }
 
     .info-header span {
@@ -122,21 +138,12 @@
         border-radius: 2px !important;
         box-shadow: none !important;
         box-sizing: border-box !important;
-        height: 30px;
+        height: 38px;
 		padding-left: 5px;
     }
 
     .newdtp {
         width: 166px;
-    }
-
-    #lastDayOfVisit label,
-    #referred-date label {
-        display: none;
-    }
-
-    #lastDayOfVisit input {
-        width: 160px;
     }
 
     .add-on {
@@ -176,9 +183,11 @@
 
     .name {
         color: #f26522;
+    }
+	.name.title{
 		display: block !important;
 		width: 100%;
-    }
+	}
 
     #inline-tabs {
         background: #f9f9f9 none repeat scroll 0 0;
@@ -234,7 +243,7 @@
     .ui-tabs-panel h2 {
         display: inline-block;
     }
-	
+		
 	#acctDate,
 	#acctFrom,
 	#rcptDate,
@@ -271,6 +280,28 @@
 		text-align: center;
 		width: auto;
 	}
+	#locations {
+		float: right;
+		margin: -42px 5px 0 0;
+		width: 200px;
+	}
+	#drugstock{
+		font-size: 14px;
+	}
+	#drugstock td:nth-child(5),
+	#drugstock td:nth-child(6){
+		text-align: right;
+	}
+	#drugstock td:first-child,
+	#drugstock td:last-child{
+		text-align: center;
+	}
+	#drugstock td:last-child a{
+		cursor: pointer;
+	}
+	i.icon-remove{
+		color: #f00;
+	}
 </style>
 
 <div class="clear"></div>
@@ -280,7 +311,7 @@
         <ul id="breadcrumbs">
             <li>
                 <a href="${ui.pageLink('referenceapplication', 'home')}">
-                    <i class="icon-home small"></i></a>
+                <i class="icon-home small"></i></a>
             </li>
 
             <li>
@@ -292,14 +323,17 @@
 
     <div class="patient-header new-patient-header">
         <div class="demographics" style="width: 100%;">
-            <h1 class="name" style="border-bottom: 1px solid #ddd;">
+            <h1 class="name title" style="border-bottom: 1px solid #ddd; padding-bottom: 2px;padding-top: 5px;">
                 <span>INVENTORY DASHBOARD &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
             </h1>
+			
+			<select id="locations">
+				<option value="-1">All</option>
+				<% locations.eachWithIndex { loc, index -> %>
+					<option value="${loc.id}" ${loc==location?'selected':''} '>${loc.name}</option>
+				<% } %>
+			</select>
         </div>
-		
-		<div id="show-icon">
-			&nbsp;
-		</div>
 		<div class="clear"></div>
 
         <div id="tabs" style="margin-top: 5px!important;">

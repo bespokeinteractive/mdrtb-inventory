@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.Location;
 import org.openmrs.api.db.DAOException;
+import org.openmrs.module.mdrtbinventory.InventoryDrugCategory;
 import org.openmrs.module.mdrtbinventory.InventoryDrugFacility;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class HibernateMdrtbInventoryServiceDAO
     }
 
     @Override
-    public List<InventoryDrugFacility> getFacilityDrug(List<Location> locations) {
+    public List<InventoryDrugFacility> getFacilityDrugs(List<Location> locations) {
         Criteria criteria = getSession().createCriteria(InventoryDrugFacility.class);
         criteria.add(Restrictions.eq("voided", false));
         criteria.add(Restrictions.in("location", locations));
@@ -52,5 +53,13 @@ public class HibernateMdrtbInventoryServiceDAO
     @Override
     public InventoryDrugFacility saveFacilityDrug(InventoryDrugFacility drug) {
         return (InventoryDrugFacility)getSession().merge(drug);
+    }
+
+    @Override
+    public List<InventoryDrugCategory> getInventoryDrugCategories() {
+        Criteria criteria = getSession().createCriteria(InventoryDrugCategory.class);
+        criteria.add(Restrictions.eq("voided", false));
+
+        return criteria.list();
     }
 }
