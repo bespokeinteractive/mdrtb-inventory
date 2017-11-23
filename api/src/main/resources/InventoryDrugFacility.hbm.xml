@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.mdrtbinventory">
+	<class name="org.openmrs.module.mdrtbinventory.InventoryDrugFacility" table="inventory_drug_facility" batch-size="500">
+		<id name="id" type="int" column="id" unsaved-value="0">
+				<generator class="native" />
+		</id>
+
+		<many-to-one name="drug" class="org.openmrs.module.mdrtbinventory.InventoryDrug" column="inventory_drug" cascade="none" lazy="false" />
+		<many-to-one name="location" class="org.openmrs.Location" column="location_id" cascade="none" lazy="false" />
+		<property name="available" column="available"  type="java.lang.Double" />
+		<property name="reorder" column="acquired_cost"  type="java.lang.Double" />
+
+		<property name="createdOn" column="created_on" type="java.util.Date" />
+		<many-to-one name="createdBy" class="org.openmrs.User" column="created_by" cascade="none" lazy="false" />
+
+        <property name="voided" column="voided" type="java.lang.Boolean" />
+        <property name="voidedOn" column="voided_on" type="java.util.Date" />
+        <many-to-one name="voidedBy" class="org.openmrs.User" column="voided_by" cascade="none"  />
+        <property name="voidReason" column="void_reason" type="java.lang.String" />
+    </class>
+</hibernate-mapping>
