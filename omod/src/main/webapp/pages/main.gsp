@@ -305,7 +305,7 @@
         <div id="tabs" style="margin-top: 5px!important;">
             <ul id="inline-tabs">
                 <li><a href="#stock">Drug Stock</a></li>
-                <li><a href="#manage">Expired Drugs</a></li>
+                <li><a href="#expired">Expired Drugs</a></li>
                 <li><a href="#receipts">Receipts</a></li>
                 <li><a href="#transers">Transfer</a></li>
                 <li><a href="#accounts">Issue to Account</a></li>
@@ -319,23 +319,23 @@
             </ul>
 
             <div id="stock">
-                { ui.includeFragment("inventoryapp", "stockBalance") }
+                ${ ui.includeFragment("mdrtbinventory", "drugstock") }
             </div>
 
-            <div id="manage">
-				{ui.includeFragment("inventoryapp", "stockBalanceExpiry")}
+            <div id="expired">
+				${ui.includeFragment("mdrtbinventory", "drugexpired")}
             </div>
 
             <div id="receipts">
-				{ ui.includeFragment("inventoryapp", "receiptsToGeneralStore") }
+				${ ui.includeFragment("mdrtbinventory", "receipts") }
             </div>
 
             <div id="transers">
-                {ui.includeFragment("inventoryapp", "transferDrugFromGeneralStore")}
+                ${ui.includeFragment("mdrtbinventory", "drugtransfer")}
             </div>
 			
 			<div id="accounts">
-				{ui.includeFragment("inventoryapp", "issueDrugAccountList")}
+				${ui.includeFragment("mdrtbinventory", "drugissueaccount")}
 			</div>
         </div>
 
