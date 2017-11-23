@@ -16,6 +16,42 @@
   		    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
   		    http://www.springframework.org/schema/util
   		    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	
+	<!-- Add here beans related to the API context -->
+    <bean id="InventoryService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager">
+            <ref bean="transactionManager"/>
+        </property>
+		
+        <property name="target">
+            <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.MdrtbInventoryServiceImpl">
+                <property name="dao">
+                    <bean class="${project.parent.groupId}.${project.parent.artifactId}.db.HibernateMdrtbInventoryServiceDAO">
+                        <property name="sessionFactory">
+                            <ref bean="sessionFactory"/>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+		
+        <property name="preInterceptors">
+            <ref bean="serviceInterceptors"/>
+        </property>
+		
+        <property name="transactionAttributeSource">
+            <ref bean="transactionAttributeSource"/>
+        </property>
+    </bean>
 
+    <!-- Services accessible via Context.getService() -->
+    <bean parent="serviceContext">
+        <property name="moduleService">
+            <list>
+                <value>${project.parent.groupId}.${project.parent.artifactId}.api.MdrtbInventoryService</value>
+                <ref local="InventoryService" />
+            </list>
+        </property>
+    </bean>
 	
 </beans>

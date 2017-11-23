@@ -176,6 +176,8 @@
 
     .name {
         color: #f26522;
+		display: block !important;
+		width: 100%;
     }
 
     #inline-tabs {
@@ -289,7 +291,7 @@
     </div>
 
     <div class="patient-header new-patient-header">
-        <div class="demographics">
+        <div class="demographics" style="width: 100%;">
             <h1 class="name" style="border-bottom: 1px solid #ddd;">
                 <span>INVENTORY DASHBOARD &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
             </h1>
