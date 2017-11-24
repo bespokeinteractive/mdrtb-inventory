@@ -2,10 +2,7 @@ package org.openmrs.module.mdrtbinventory.api;
 
 import org.openmrs.Location;
 import org.openmrs.api.impl.BaseOpenmrsService;
-import org.openmrs.module.mdrtbinventory.InventoryDrugCategory;
-import org.openmrs.module.mdrtbinventory.InventoryDrugFacility;
-import org.openmrs.module.mdrtbinventory.InventoryDrugTransaction;
-import org.openmrs.module.mdrtbinventory.InventoryDrugTransactionType;
+import org.openmrs.module.mdrtbinventory.*;
 import org.openmrs.module.mdrtbinventory.db.MdrtbInventoryServiceDAO;
 
 import java.util.Date;
@@ -57,5 +54,10 @@ public class MdrtbInventoryServiceImpl
     @Override
     public InventoryDrugTransactionType getInventoryDrugTransactionType(Integer id) {
         return dao.getInventoryDrugTransactionType(id);
+    }
+
+    @Override
+    public List<InventoryDrugBatches> getExpiredBatches(List<Location> locations, Boolean indented) {
+        return dao.getExpiredBatches(locations, indented);
     }
 }

@@ -3,6 +3,7 @@ package org.openmrs.module.mdrtbinventory.fragment.controller;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.mdrtb.service.MdrtbService;
+import org.openmrs.module.mdrtbinventory.InventoryDrugBatches;
 import org.openmrs.module.mdrtbinventory.InventoryDrugFacility;
 import org.openmrs.module.mdrtbinventory.InventoryDrugTransaction;
 import org.openmrs.module.mdrtbinventory.InventoryDrugTransactionType;
@@ -47,15 +48,18 @@ public class DrugsFragmentController {
         return SimpleObject.fromCollection(Collections.EMPTY_LIST, ui);
     }
 
-
-
-
+    public List<SimpleObject> getExpiredFacilityDrugs(@RequestParam(value = "location") Location location,
+                                                      UiUtils ui){
+        List<InventoryDrugBatches> batches = service.getExpiredBatches(this.getLocationsByUser(location),false);
+        return SimpleObject.fromCollection(batches, ui, "id", "available", "expiry", "batch", "item.drug.drug.name", "item.drug.category.name", "item.drug.formulation.name", "item.drug.formulation.dosage");
+    }
 
     //Return Locations
     List<Location> getLocationsByUser(Location location){
         if (location != null){
             List<Location> locations = new ArrayList<Location>();
             locations.add(location);
+
             return locations;
         }
 

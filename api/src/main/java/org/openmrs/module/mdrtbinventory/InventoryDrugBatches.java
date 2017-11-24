@@ -26,6 +26,8 @@ public class InventoryDrugBatches
     private String comments;
     private Date createdOn;
     private User createdBy;
+    private Date indentedOn;
+    private User indentedBy;
     private Boolean voided;
     private Date voidedOn;
     private User voidedBy;
@@ -131,6 +133,22 @@ public class InventoryDrugBatches
 
     public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public Date getIndentedOn() {
+        return indentedOn;
+    }
+
+    public void setIndentedOn(Date indentedOn) {
+        this.indentedOn = indentedOn;
+    }
+
+    public User getIndentedBy() {
+        return indentedBy;
+    }
+
+    public void setIndentedBy(User indentedBy) {
+        this.indentedBy = indentedBy;
     }
 
     public Boolean getVoided() {

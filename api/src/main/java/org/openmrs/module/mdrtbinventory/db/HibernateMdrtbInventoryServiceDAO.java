@@ -1,5 +1,6 @@
 package org.openmrs.module.mdrtbinventory.db;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
@@ -8,10 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.Location;
 import org.openmrs.api.db.DAOException;
-import org.openmrs.module.mdrtbinventory.InventoryDrugCategory;
-import org.openmrs.module.mdrtbinventory.InventoryDrugFacility;
-import org.openmrs.module.mdrtbinventory.InventoryDrugTransaction;
-import org.openmrs.module.mdrtbinventory.InventoryDrugTransactionType;
+import org.openmrs.module.mdrtbinventory.*;
 
 import java.util.Date;
 import java.util.List;
@@ -96,5 +94,23 @@ public class HibernateMdrtbInventoryServiceDAO
         criteria.add(Restrictions.eq("id", id));
 
         return  (InventoryDrugTransactionType) criteria.uniqueResult();
+    }
+
+    @Override
+    public List<InventoryDrugBatches> getExpiredBatches(List<Location> locations, Boolean indented) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugBatches.class);
+        criteria.createAlias("item", "item");
+        criteria.add(Restrictions.eq("voided", false));
+        criteria.add(Restrictions.le("expiry", new Date()));
+        criteria.add(Restrictions.in("item.location", locations));
+
+        if (indented != null && indented){
+            criteria.add(Restrictions.isNotNull("indentedOn"));
+        }
+        else if (indented != null && !indented){
+            criteria.add(Restrictions.isNull("indentedOn"));
+        }
+
+        return criteria.list();
     }
 }

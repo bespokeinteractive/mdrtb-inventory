@@ -23,6 +23,9 @@
 		<property name="createdOn" column="created_on" type="java.util.Date" />
 		<many-to-one name="createdBy" class="org.openmrs.User" column="created_by" cascade="none" lazy="false" />
 
+        <property name="indentedOn" column="indent_on" type="java.util.Date" />
+        <many-to-one name="indentedBy" class="org.openmrs.User" column="indent_by" cascade="none" lazy="false" />
+
         <property name="voided" column="voided" type="java.lang.Boolean" />
         <property name="voidedOn" column="voided_on" type="java.util.Date" />
         <many-to-one name="voidedBy" class="org.openmrs.User" column="voided_by" cascade="none"  />

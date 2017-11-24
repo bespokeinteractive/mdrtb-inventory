@@ -1,10 +1,7 @@
 package org.openmrs.module.mdrtbinventory.db;
 
 import org.openmrs.Location;
-import org.openmrs.module.mdrtbinventory.InventoryDrugCategory;
-import org.openmrs.module.mdrtbinventory.InventoryDrugFacility;
-import org.openmrs.module.mdrtbinventory.InventoryDrugTransaction;
-import org.openmrs.module.mdrtbinventory.InventoryDrugTransactionType;
+import org.openmrs.module.mdrtbinventory.*;
 
 import java.util.Date;
 import java.util.List;
@@ -19,12 +16,11 @@ public interface MdrtbInventoryServiceDAO {
     List<InventoryDrugFacility> getFacilityDrugs(List<Location> locations);
     InventoryDrugFacility saveFacilityDrug(InventoryDrugFacility drug);
 
-    //Categories
     List<InventoryDrugCategory> getInventoryDrugCategories();
 
-    //Transactions
     List<InventoryDrugTransaction> getInventoryDrugTransactions(List<Location> locations, InventoryDrugTransactionType type, Date startDate, Date endDate);
 
-    //TransactionsType
     InventoryDrugTransactionType getInventoryDrugTransactionType(Integer id);
+
+    List<InventoryDrugBatches> getExpiredBatches(List<Location> locations, Boolean indented);
 }

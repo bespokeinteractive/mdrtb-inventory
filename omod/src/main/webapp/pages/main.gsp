@@ -7,7 +7,6 @@
 %>
 
 <script>
-	var loaded = false;
 	var refreshInTable = function (resultData, dTable) {
         var rowCount = resultData.length;
         if (rowCount == 0) {
@@ -30,7 +29,11 @@
 			if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'stock'){
 				jq('.add-receipts').hide(100);
 				getDrugStockList();
-			}			
+			}
+			else if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'expired'){
+				jq('.add-receipts').show(100);
+				getExpiryStockList();
+			}
 			else if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'receipts'){
 				jq('.add-receipts').show(100);
 				getReceiptsStockList();
@@ -43,6 +46,9 @@
 		jq('#locations').click(function(){
 			if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'stock'){
 				getDrugStockList();
+			}
+			else if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'expired'){
+				getExpiryStockList();
 			}
 			else if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'receipts'){
 				getReceiptsStockList();
@@ -275,16 +281,19 @@
 		width: 200px;
 	}
 	#receiptTable,
+	#expiryTable,
 	#drugstock{
 		font-size: 14px;
 	}
 	#receiptTable td:nth-child(6),
+	#expiryTable td:nth-child(6),
 	#drugstock td:nth-child(5),
 	#drugstock td:nth-child(6){
 		text-align: right;
 	}
 	#receiptTable td:first-child,
 	#receiptTable td:last-child,
+	#expiryTable td:last-child,
 	#drugstock td:first-child,
 	#drugstock td:last-child{
 		text-align: center;
