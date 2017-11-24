@@ -53,9 +53,13 @@
 		});
 		
 		jq('.add-receipts').click(function(){
-			window.location.href = (emr.pageLink('inventoryapp','addReceiptsToGeneralStore'));
+            window.location.href = "addreceipt.page";
 		});
 	});
+
+
+
+
 </script>
 
 <style>

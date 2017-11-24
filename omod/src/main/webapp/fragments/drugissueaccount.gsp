@@ -1,4 +1,9 @@
+<style>
+#date-created label{
+    display: inline-block;
+}
 
+</style>
 <div class="dashboard clear">
     <div class="info-section">
         <div class="info-header">
@@ -12,12 +17,13 @@
 <table id="drugstock">
     <thead>
     <th style="width:1px">#</th>
-    <th style="width:100px">DRUG NAME</th>
-    <th style="width:100px;">CATEGORY</th>
-    <th style="width:100px;">FORMULATION</th>
-    <th style="width:80px">QUANTITY</th>
-    <th style="width:80px">REORDER</th>
+    <th style="width:100px">DATE CREATED</th>
+    <th style="width:100px;">DESCRIPTION</th>
+    <th style="width:100px;">STORE</th>
+    <th style="width:80px">NOTES</th>
+
     </thead>
     <tbody>
     </tbody>
 </table>
+</div>
