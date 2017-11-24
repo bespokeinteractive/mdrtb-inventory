@@ -19,6 +19,8 @@ public class InventoryDrugBatches
     private Date date;
     private InventoryDrugFacility item;
     private String batch;
+    private String company;
+    private String supplier;
     private Double receipt;
     private Double available;
     private Date manufactured;
@@ -77,6 +79,22 @@ public class InventoryDrugBatches
 
     public void setBatch(String batch) {
         this.batch = batch;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
     }
 
     public Double getReceipt() {

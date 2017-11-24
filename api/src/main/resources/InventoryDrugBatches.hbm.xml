@@ -13,6 +13,8 @@
 		<many-to-one name="item" class="org.openmrs.module.mdrtbinventory.InventoryDrugFacility" column="facility_drug" cascade="none" lazy="false" />
 
         <property name="batch" column="batch_no"  type="java.lang.String" />
+        <property name="company" column="company"  type="java.lang.String" />
+        <property name="supplier" column="supplier"  type="java.lang.String" />
         <property name="receipt" column="receipt"  type="java.lang.Double" />
         <property name="available" column="available"  type="java.lang.Double" />
 
