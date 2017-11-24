@@ -104,7 +104,7 @@
 						<option value="${catg.name}">${catg.name.toUpperCase()}</option>
 					<% } %>
 				</select>
-                <label for="drugStockName" style="color: #f26522;">&nbsp;&nbsp; Name </label>
+                <label for="drugStockName" style="color: #f26522;">&nbsp;&nbsp; Filter </label>
                 <input id = "drugStockName" type="text" value name = "drugStockName" placeholder="Drug Name" style="width:300px" />
             </div>
 			<div class="clear"></div>

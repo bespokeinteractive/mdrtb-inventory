@@ -82,8 +82,9 @@
 			} );
 		}).api().draw();
 		
-		jq('#receiptText').on('keyup', function () {
-			expiryTable.api().search( this.value ).draw();
+		jq('#expiryName, #expiryCategory').on('keyup change', function () {
+			var value = jq('#expiryName').val() + ' ' + jq('#expiryCategory').val();			
+			expiryTable.api().search( value ).draw();
 		});
 	});
 </script>
@@ -93,15 +94,20 @@
         <div class="info-header">
             <i class="icon-calendar"></i>
             <h3 class="name">EXPIRED DRUGS</h3>
-            <div style="float:right;margin:-40px 5px 0px 10px; padding:0px 15px;">
+            <div class="filter-list">
                 <i class="icon-filter" style="font-size: 26px ; color: #5b57a6" ></i>
-                <label for="stockCategoryId" style="color: #f26522;">Category</label>
-                <select id = "stockCategoryId" style="width: 200px" name = "stockCategoryId"> </select>
-                <label for="drugStockName" style="color: #f26522;">&nbsp;&nbsp; Name </label>
-                <input id = "drugStockName" type="text" value name = "drugStockName" placeholder="Drug Name" >
-                <a class = "button task" id=" expirySearch" style="line-height: 0.9em"> Search</a>
-
+                <label for="expiryCategory" style="color: #f26522;">Category</label>
+                <select id = "expiryCategory" style="width: 200px" name = "stockCategoryId">
+					<option value="">ALL CATEGORIES</option>
+					<% categories.eachWithIndex { catg, index -> %>
+						<option value="${catg.name}">${catg.name.toUpperCase()}</option>
+					<% } %>
+				</select>
+				
+                <label for="expiryName" style="color: #f26522;">&nbsp;&nbsp; Filter </label>
+                <input id = "expiryName" type="text" placeholder="Drug Name" style="width:300px" />
             </div>
+			<div class="clear"></div>
         </div>
     </div>
 </div>
