@@ -38,9 +38,12 @@
 	<!-- Maps hibernate file's, if present -->
 	<mappingFiles>
         InventoryDrug.hbm.xml
+        InventoryDrugBatches.hbm.xml
         InventoryDrugCategory.hbm.xml
 		InventoryDrugFacility.hbm.xml
         InventoryDrugFormulation.hbm.xml
+        InventoryDrugTransaction.hbm.xml
+        InventoryDrugTransactionType.hbm.xml
 	</mappingFiles>
 
 	<!-- Internationalization -->

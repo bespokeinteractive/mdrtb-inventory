@@ -19,6 +19,9 @@ public class MainPageController {
 
     public String get(PageModel model,
                       UiSessionContext session){
+        if (!session.isAuthenticated()){
+            return "redirect: index.htm";
+        }
         List<Location> locations = Context.getService(MdrtbService.class).getLocationsByUser();
         List<InventoryDrugCategory> categories = service.getInventoryDrugCategories();
 

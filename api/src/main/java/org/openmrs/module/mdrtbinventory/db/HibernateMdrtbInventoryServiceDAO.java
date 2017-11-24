@@ -10,7 +10,10 @@ import org.openmrs.Location;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.mdrtbinventory.InventoryDrugCategory;
 import org.openmrs.module.mdrtbinventory.InventoryDrugFacility;
+import org.openmrs.module.mdrtbinventory.InventoryDrugTransaction;
+import org.openmrs.module.mdrtbinventory.InventoryDrugTransactionType;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,5 +64,37 @@ public class HibernateMdrtbInventoryServiceDAO
         criteria.add(Restrictions.eq("voided", false));
 
         return criteria.list();
+    }
+
+    @Override
+    public List<InventoryDrugTransaction> getInventoryDrugTransactions(List<Location> locations, InventoryDrugTransactionType type, Date startDate, Date endDate) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugTransaction.class);
+        criteria.createAlias("item", "item");
+        criteria.add(Restrictions.eq("voided", false));
+        criteria.add(Restrictions.in("item.location", locations));
+
+        if (type != null){
+            criteria.add(Restrictions.eq("type", type));
+        }
+
+        if (startDate != null && endDate != null){
+            criteria.add(Restrictions.between("date", startDate, endDate));
+        }
+        else if(endDate != null){
+            criteria.add(Restrictions.le("date", endDate));
+        }
+        else if(startDate != null){
+            criteria.add(Restrictions.ge("date", startDate));
+        }
+
+        return criteria.list();
+    }
+
+    @Override
+    public InventoryDrugTransactionType getInventoryDrugTransactionType(Integer id) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugTransactionType.class);
+        criteria.add(Restrictions.eq("id", id));
+
+        return  (InventoryDrugTransactionType) criteria.uniqueResult();
     }
 }

@@ -3,9 +3,11 @@
 	ui.includeCss("uicommons", "datatables/dataTables_jui.css")
 	ui.includeJavascript("mdrtbregistration", "jq.dataTables.min.js")
 	ui.includeJavascript("mdrtbdashboard", "moment.js")
+	ui.includeJavascript("mdrtbdashboard", "jq.browser.select.js")
 %>
 
 <script>
+	var loaded = false;
 	var refreshInTable = function (resultData, dTable) {
         var rowCount = resultData.length;
         if (rowCount == 0) {
@@ -24,18 +26,26 @@
 	jq(function () {
 		jq("#tabs").tabs();
 		
-		jq('#inline-tabs li').click(function(){			
-			if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'receipts'){
+		jq('#inline-tabs li').click(function(){
+			if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'stock'){
+				jq('.add-receipts').hide(100);
+				getDrugStockList();
+			}			
+			else if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'receipts'){
 				jq('.add-receipts').show(100);
+				getReceiptsStockList();
 			}
 			else{
 				jq('.add-receipts').hide(100);
 			}
-		}).click();
+		});
 		
 		jq('#locations').click(function(){
 			if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'stock'){
 				getDrugStockList();
+			}
+			else if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'receipts'){
+				getReceiptsStockList();
 			}
 			else{
 				//Other Pages/Functions
@@ -51,19 +61,6 @@
 <style>
     body {
         margin-top: 20px;
-    }
-
-    .col1, .col2, .col3, .col4, .col5, .col6, .col7, .col8, .col9, .col10, .col11, .col12 {
-        color: #555;
-        text-align: left;
-    }
-
-    .info-header span {
-        cursor: pointer;
-        display: inline-block;
-        float: right;
-        margin-top: -2px;
-        padding-right: 5px;
     }
 
     .dashboard .info-section {
@@ -116,15 +113,6 @@
         display: inline-block;
     }
 
-    .identifiers span {
-        border-radius: 50px;
-        color: white;
-        display: inline;
-        font-size: 0.8em;
-        letter-spacing: 1px;
-        margin: 5px;
-    }
-
     table.dataTable thead th, table.dataTable thead td {
         padding: 5px 10px;
     }
@@ -152,11 +140,12 @@
 		font-size: 8px !important;
 		left: auto;
 		margin-left: -29px;
-		margin-top: 4px !important;
+		margin-top: 8px !important;
 		position: absolute;
     }
 	.add-on i {
-        color: #009384!important;
+        color: #f26522!important;
+		font-size: 2.5em!important;
 	}
 
     .chrome .add-on {
@@ -164,11 +153,7 @@
         margin-top: -27px !important;
         position: relative !important;
     }
-
-    #lastDayOfVisit-wrapper .add-on {
-        margin-top: 5px;
-    }
-
+	
     .ui-widget-content a {
         color: #007fff;
     }
@@ -276,7 +261,7 @@
 	#inline-tabs li:nth-child(6) a.button{
 		height: 17px;
 		margin-top: -5px;
-		padding-top: 12px;
+		padding: 10px;
 		text-align: center;
 		width: auto;
 	}
@@ -285,13 +270,17 @@
 		margin: -42px 5px 0 0;
 		width: 200px;
 	}
+	#receiptTable,
 	#drugstock{
 		font-size: 14px;
 	}
+	#receiptTable td:nth-child(6),
 	#drugstock td:nth-child(5),
 	#drugstock td:nth-child(6){
 		text-align: right;
 	}
+	#receiptTable td:first-child,
+	#receiptTable td:last-child,
 	#drugstock td:first-child,
 	#drugstock td:last-child{
 		text-align: center;
@@ -301,6 +290,10 @@
 	}
 	i.icon-remove{
 		color: #f00;
+	}
+	.info-header div.filter-list{
+		margin: -5px 5px 2px 10px;
+		float: right;
 	}
 </style>
 
@@ -361,7 +354,7 @@
             </div>
 
             <div id="receipts">
-				${ ui.includeFragment("mdrtbinventory", "receipts") }
+				${ ui.includeFragment("mdrtbinventory", "drugreceipts") }
             </div>
 
             <div id="transers">

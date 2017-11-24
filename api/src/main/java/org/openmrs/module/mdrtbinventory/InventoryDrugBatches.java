@@ -9,17 +9,21 @@ import java.util.Date;
 
 /**
  * Created by Dennys Henry
- * Created on 11/23/2017.
+ * Created on 11/24/2017.
  */
-public class InventoryDrugFacility
+public class InventoryDrugBatches
         implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-    private InventoryDrug drug;
-    private Location location;
+    private Date date;
+    private InventoryDrugFacility item;
+    private String batch;
+    private Double receipt;
     private Double available;
-    private Double reorder;
+    private Date manufactured;
+    private Date expiry;
+    private String comments;
     private Date createdOn;
     private User createdBy;
     private Boolean voided;
@@ -27,20 +31,18 @@ public class InventoryDrugFacility
     private User voidedBy;
     private String voidReason;
 
-    public InventoryDrugFacility(){
+    public InventoryDrugBatches(){
         this.voided = false;
-        this.reorder = 0.0;
-        this.available = 0.0;
 
         this.createdOn = new Date();
         this.createdBy = Context.getAuthenticatedUser();
     }
 
-    public InventoryDrugFacility(InventoryDrug drug, Location location){
+    public InventoryDrugBatches(InventoryDrugFacility item, String batch){
         super();
 
-        this.drug = drug;
-        this.location = location;
+        this.item = item;
+        this.batch = batch;
     }
 
     public Integer getId() {
@@ -51,20 +53,36 @@ public class InventoryDrugFacility
         this.id = id;
     }
 
-    public InventoryDrug getDrug() {
-        return drug;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDrug(InventoryDrug drug) {
-        this.drug = drug;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Location getLocation() {
-        return location;
+    public InventoryDrugFacility getItem() {
+        return item;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setItem(InventoryDrugFacility item) {
+        this.item = item;
+    }
+
+    public String getBatch() {
+        return batch;
+    }
+
+    public void setBatch(String batch) {
+        this.batch = batch;
+    }
+
+    public Double getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(Double receipt) {
+        this.receipt = receipt;
     }
 
     public Double getAvailable() {
@@ -75,12 +93,28 @@ public class InventoryDrugFacility
         this.available = available;
     }
 
-    public Double getReorder() {
-        return reorder;
+    public Date getManufactured() {
+        return manufactured;
     }
 
-    public void setReorder(Double reorder) {
-        this.reorder = reorder;
+    public void setManufactured(Date manufactured) {
+        this.manufactured = manufactured;
+    }
+
+    public Date getExpiry() {
+        return expiry;
+    }
+
+    public void setExpiry(Date expiry) {
+        this.expiry = expiry;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
     public Date getCreatedOn() {

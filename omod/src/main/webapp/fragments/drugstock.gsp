@@ -95,7 +95,7 @@
         <div class="info-header">
             <i class="icon-folder-open"></i>
             <h3 class="name">VIEW DRUGS</h3>
-            <div style="float:right;margin:-5px 5px 2px 10px; padding:0px 15px;">
+            <div style="float:right;margin:-5px 5px 2px 10px;">
                 <i class="icon-filter" style="font-size: 26px ; color: #5b57a6" ></i>
                 <label for="stockCategoryId" style="color: #f26522;">Category</label>
                 <select id = "stockCategoryId" style="width: 200px" name = "stockCategoryId">

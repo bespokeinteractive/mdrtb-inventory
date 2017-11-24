@@ -3,7 +3,10 @@ package org.openmrs.module.mdrtbinventory.db;
 import org.openmrs.Location;
 import org.openmrs.module.mdrtbinventory.InventoryDrugCategory;
 import org.openmrs.module.mdrtbinventory.InventoryDrugFacility;
+import org.openmrs.module.mdrtbinventory.InventoryDrugTransaction;
+import org.openmrs.module.mdrtbinventory.InventoryDrugTransactionType;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,4 +21,10 @@ public interface MdrtbInventoryServiceDAO {
 
     //Categories
     List<InventoryDrugCategory> getInventoryDrugCategories();
+
+    //Transactions
+    List<InventoryDrugTransaction> getInventoryDrugTransactions(List<Location> locations, InventoryDrugTransactionType type, Date startDate, Date endDate);
+
+    //TransactionsType
+    InventoryDrugTransactionType getInventoryDrugTransactionType(Integer id);
 }
