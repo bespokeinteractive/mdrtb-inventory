@@ -44,7 +44,9 @@
         InventoryDrugFormulation.hbm.xml
         InventoryDrugTransaction.hbm.xml
         InventoryDrugTransactionType.hbm.xml
-	</mappingFiles>
+        InventoryDrugIssues.hbm.xml
+        InventoryDrugIssuesDetails.hbm.xml
+    </mappingFiles>
 
 	<!-- Internationalization -->
 	<!-- All message codes should start with ${project.parent.artifactId}. -->

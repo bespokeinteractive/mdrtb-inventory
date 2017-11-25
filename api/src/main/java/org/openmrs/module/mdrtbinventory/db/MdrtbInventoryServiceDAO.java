@@ -32,4 +32,8 @@ public interface MdrtbInventoryServiceDAO {
     List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item);
     List<InventoryDrugBatches> getExpiredBatches(List<Location> locations, Boolean indented);
     InventoryDrugBatches saveInventoryDrugBatches(InventoryDrugBatches batch);
+
+    InventoryDrugIssues getInventoryDrugIssue(Integer id);
+    List<InventoryDrugIssues> getInventoryDrugIssues(List<Location> locations);
+    InventoryDrugIssues saveInventoryDrugIssue(InventoryDrugIssues issue);
 }
