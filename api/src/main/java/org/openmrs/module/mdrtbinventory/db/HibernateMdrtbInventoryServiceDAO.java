@@ -6,6 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.Location;
 import org.openmrs.api.db.DAOException;
@@ -35,9 +36,42 @@ public class HibernateMdrtbInventoryServiceDAO
 
 
     @Override
+    public InventoryDrug getInventoryDrug(Integer id) {
+        Criteria criteria = getSession().createCriteria(InventoryDrug.class);
+        criteria.add(Restrictions.eq("id", id));
+        return  (InventoryDrug) criteria.uniqueResult();
+    }
+
+    @Override
+    public List<InventoryDrug> getInventoryDrugs() {
+        Criteria criteria = getSession().createCriteria(InventoryDrug.class);
+        criteria.add(Restrictions.eq("voided", false));
+        criteria.createAlias("category", "catg");
+        criteria.addOrder(Order.asc("catg.id"));
+
+        criteria.createAlias("drug", "drug");
+        criteria.addOrder(Order.asc("drug.name"));
+
+        criteria.createAlias("formulation", "form");
+        criteria.addOrder(Order.asc("form.name"));
+        criteria.addOrder(Order.asc("form.dosage"));
+
+        return criteria.list();
+    }
+
+    @Override
     public InventoryDrugFacility getFacilityDrug(Integer id) {
         Criteria criteria = getSession().createCriteria(InventoryDrugFacility.class);
         criteria.add(Restrictions.eq("id", id));
+
+        return  (InventoryDrugFacility) criteria.uniqueResult();
+    }
+
+    @Override
+    public InventoryDrugFacility getFacilityDrug(Location location, InventoryDrug drug) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugFacility.class);
+        criteria.add(Restrictions.eq("location", location));
+        criteria.add(Restrictions.eq("drug", drug));
 
         return  (InventoryDrugFacility) criteria.uniqueResult();
     }
@@ -89,11 +123,34 @@ public class HibernateMdrtbInventoryServiceDAO
     }
 
     @Override
+    public InventoryDrugTransaction saveInventoryDrugTransaction(InventoryDrugTransaction transaction) {
+        return (InventoryDrugTransaction)getSession().merge(transaction);
+    }
+
+    @Override
     public InventoryDrugTransactionType getInventoryDrugTransactionType(Integer id) {
         Criteria criteria = getSession().createCriteria(InventoryDrugTransactionType.class);
         criteria.add(Restrictions.eq("id", id));
 
         return  (InventoryDrugTransactionType) criteria.uniqueResult();
+    }
+
+    @Override
+    public InventoryDrugBatches getInventoryDrugBatch(Integer id) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugBatches.class);
+        criteria.add(Restrictions.eq("id", id));
+
+        return  (InventoryDrugBatches) criteria.uniqueResult();
+    }
+
+    @Override
+    public InventoryDrugBatches getInventoryDrugBatch(InventoryDrugFacility item, String batch, String company) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugBatches.class);
+        criteria.add(Restrictions.eq("item", item));
+        criteria.add(Restrictions.eq("batch", batch));
+        criteria.add(Restrictions.eq("company", company));
+
+        return  (InventoryDrugBatches) criteria.uniqueResult();
     }
 
     @Override
@@ -112,5 +169,10 @@ public class HibernateMdrtbInventoryServiceDAO
         }
 
         return criteria.list();
+    }
+
+    @Override
+    public InventoryDrugBatches saveInventoryDrugBatches(InventoryDrugBatches batch) {
+        return (InventoryDrugBatches)getSession().merge(batch);
     }
 }

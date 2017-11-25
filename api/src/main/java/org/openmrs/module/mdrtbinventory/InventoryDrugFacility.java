@@ -36,13 +36,6 @@ public class InventoryDrugFacility
         this.createdBy = Context.getAuthenticatedUser();
     }
 
-    public InventoryDrugFacility(InventoryDrug drug, Location location){
-        super();
-
-        this.drug = drug;
-        this.location = location;
-    }
-
     public Integer getId() {
         return id;
     }

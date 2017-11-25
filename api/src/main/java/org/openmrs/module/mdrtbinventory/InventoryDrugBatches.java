@@ -37,16 +37,11 @@ public class InventoryDrugBatches
 
     public InventoryDrugBatches(){
         this.voided = false;
+        this.receipt = 0.0;
+        this.available = 0.0;
 
         this.createdOn = new Date();
         this.createdBy = Context.getAuthenticatedUser();
-    }
-
-    public InventoryDrugBatches(InventoryDrugFacility item, String batch){
-        super();
-
-        this.item = item;
-        this.batch = batch;
     }
 
     public Integer getId() {

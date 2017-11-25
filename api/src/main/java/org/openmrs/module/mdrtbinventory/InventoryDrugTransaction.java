@@ -33,6 +33,11 @@ public class InventoryDrugTransaction implements Serializable {
     public InventoryDrugTransaction(){
         this.voided = false;
 
+        this.opening = 0.0;
+        this.receipt = 0.0;
+        this.issue = 0.0;
+        this.closing = 0.0;
+
         this.createdOn = new Date();
         this.createdBy = Context.getAuthenticatedUser();
     }
