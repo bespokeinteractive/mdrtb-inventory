@@ -154,6 +154,15 @@ public class HibernateMdrtbInventoryServiceDAO
     }
 
     @Override
+    public List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugBatches.class);
+        criteria.add(Restrictions.eq("voided", false));
+        criteria.add(Restrictions.eq("item", item));
+
+        return criteria.list();
+    }
+
+    @Override
     public List<InventoryDrugBatches> getExpiredBatches(List<Location> locations, Boolean indented) {
         Criteria criteria = getSession().createCriteria(InventoryDrugBatches.class);
         criteria.createAlias("item", "item");

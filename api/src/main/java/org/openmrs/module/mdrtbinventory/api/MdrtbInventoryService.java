@@ -22,6 +22,7 @@ public interface MdrtbInventoryService
     InventoryDrugFacility getFacilityDrug(Integer id);
     InventoryDrugFacility getFacilityDrug(Location location, InventoryDrug drug);
     List<InventoryDrugFacility> getFacilityDrugs(List<Location> locations);
+    List<InventoryDrugFacility> getFacilityDrugsWithBatches(List<Location> locations);
     InventoryDrugFacility saveFacilityDrug(InventoryDrugFacility drug);
 
     List<InventoryDrugCategory> getInventoryDrugCategories();
@@ -33,6 +34,7 @@ public interface MdrtbInventoryService
 
     InventoryDrugBatches getInventoryDrugBatch(Integer id);
     InventoryDrugBatches getInventoryDrugBatch(InventoryDrugFacility item, String batch, String company);
+    List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item);
     List<InventoryDrugBatches> getExpiredBatches(List<Location> locations, Boolean indented);
     InventoryDrugBatches saveInventoryDrugBatches(InventoryDrugBatches batch);
 }

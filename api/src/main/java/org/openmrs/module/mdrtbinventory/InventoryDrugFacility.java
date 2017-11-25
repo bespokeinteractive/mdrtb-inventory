@@ -6,6 +6,7 @@ import org.openmrs.api.context.Context;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Dennys Henry
@@ -26,6 +27,10 @@ public class InventoryDrugFacility
     private Date voidedOn;
     private User voidedBy;
     private String voidReason;
+
+    //Non-Persistent Objects
+    private Boolean hasBatches;
+    private List<InventoryDrugBatches> batches;
 
     public InventoryDrugFacility(){
         this.voided = false;
@@ -122,5 +127,21 @@ public class InventoryDrugFacility
 
     public void setVoidReason(String voidReason) {
         this.voidReason = voidReason;
+    }
+
+    public Boolean getHasBatches() {
+        return hasBatches;
+    }
+
+    public void setHasBatches(Boolean hasBatches) {
+        this.hasBatches = hasBatches;
+    }
+
+    public List<InventoryDrugBatches> getBatches() {
+        return batches;
+    }
+
+    public void setBatches(List<InventoryDrugBatches> batches) {
+        this.batches = batches;
     }
 }

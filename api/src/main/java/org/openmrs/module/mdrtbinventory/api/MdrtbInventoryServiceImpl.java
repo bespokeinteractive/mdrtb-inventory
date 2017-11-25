@@ -52,6 +52,21 @@ public class MdrtbInventoryServiceImpl
     }
 
     @Override
+    public List<InventoryDrugFacility> getFacilityDrugsWithBatches(List<Location> locations) {
+        List<InventoryDrugFacility> items = dao.getFacilityDrugs(locations);
+
+        for (int i=0; i<items.size(); i++){
+            List<InventoryDrugBatches> batches = dao.getInventoryDrugBatches(items.get(i));
+            items.get(i).setBatches(batches);
+            if (batches.size()>0){
+                items.get(i).setHasBatches(true);
+            }
+        }
+
+        return items;
+    }
+
+    @Override
     public InventoryDrugFacility saveFacilityDrug(InventoryDrugFacility drug) {
         return dao.saveFacilityDrug(drug);
     }
@@ -84,6 +99,11 @@ public class MdrtbInventoryServiceImpl
     @Override
     public InventoryDrugBatches getInventoryDrugBatch(InventoryDrugFacility item, String batch, String company) {
         return dao.getInventoryDrugBatch(item, batch, company);
+    }
+
+    @Override
+    public List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item) {
+        return dao.getInventoryDrugBatches(item);
     }
 
     @Override

@@ -308,6 +308,14 @@
 		margin: -5px 5px 2px 10px;
 		float: right;
 	}
+	.button.add {
+		padding: 13px 7px;
+		margin-right: 5px;
+		margin-left: 0;
+	}
+	i.icon-plus.small{
+		color: #fff;
+	}
 </style>
 
 <div class="clear"></div>

@@ -29,6 +29,7 @@ public interface MdrtbInventoryServiceDAO {
 
     InventoryDrugBatches getInventoryDrugBatch(Integer id);
     InventoryDrugBatches getInventoryDrugBatch(InventoryDrugFacility item, String batch, String company);
+    List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item);
     List<InventoryDrugBatches> getExpiredBatches(List<Location> locations, Boolean indented);
     InventoryDrugBatches saveInventoryDrugBatches(InventoryDrugBatches batch);
 }
