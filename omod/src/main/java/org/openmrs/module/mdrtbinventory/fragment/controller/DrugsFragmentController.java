@@ -3,6 +3,8 @@ package org.openmrs.module.mdrtbinventory.fragment.controller;
 import org.apache.commons.lang.StringUtils;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.appui.UiSessionContext;
+import org.openmrs.module.mdrtb.model.LocationCentres;
 import org.openmrs.module.mdrtb.service.MdrtbService;
 import org.openmrs.module.mdrtbinventory.*;
 import org.openmrs.module.mdrtbinventory.api.MdrtbInventoryService;
@@ -54,6 +56,30 @@ public class DrugsFragmentController {
                                                       UiUtils ui){
         List<InventoryDrugBatches> batches = service.getExpiredBatches(this.getLocationsByUser(location),false);
         return SimpleObject.fromCollection(batches, ui, "id", "available", "expiry", "batch", "item.drug.drug.name", "item.drug.category.name", "item.drug.formulation.name", "item.drug.formulation.dosage");
+    }
+
+    public List<SimpleObject> getFacilityIssues(@RequestParam(value = "location") Location location,
+                                                UiUtils ui){
+        List<InventoryDrugIssues> issues = service.getInventoryDrugIssues(this.getLocationsByUser(location));
+        return SimpleObject.fromCollection(issues, ui, "id", "date", "account", "description");
+    }
+
+    public List<SimpleObject> getDrugsBatches(@RequestParam(value = "item") Integer item_id,
+                                              UiUtils ui){
+        InventoryDrugFacility item = service.getFacilityDrug(item_id);
+        List<InventoryDrugBatches> batches = service.getInventoryDrugBatches(item);
+        if (batches!=null){
+            Collections.sort(batches, new Comparator<InventoryDrugBatches>() {
+                @Override
+                public int compare(InventoryDrugBatches o1, InventoryDrugBatches o2) {
+                    return o1.getExpiry().compareTo(o2.getExpiry());
+                }
+            });
+
+            return SimpleObject.fromCollection(batches, ui, "id", "batch", "company", "available", "manufactured", "expiry");
+        }
+
+        return SimpleObject.fromCollection(Collections.EMPTY_LIST, ui);
     }
 
     public SimpleObject addReceipt(@BindParams("receipt") DrugItemsWrapper wrapper,
@@ -123,6 +149,61 @@ public class DrugsFragmentController {
                 transaction.setIssue(0.0);
                 transaction.setClosing(item.getAvailable());
                 transaction.setDescription("RECEIPT FROM " + wrapper.getSupplier().toUpperCase());
+                this.service.saveInventoryDrugTransaction(transaction);
+            }
+        }
+
+        return SimpleObject.create("status", "success", "message", "Facility Receipt has been added successfully");
+    }
+
+    public SimpleObject addIssues(@BindParams("issues") DrugItemsWrapper wrapper,
+                                  HttpServletRequest request,
+                                  UiSessionContext session)
+            throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        InventoryDrugIssues issue = new InventoryDrugIssues();
+        issue.setDate(wrapper.getDate());
+        issue.setLocation(session.getSessionLocation());
+        issue.setAccount(wrapper.getAccount());
+        issue.setDescription(wrapper.getDescription());
+        issue = this.service.saveInventoryDrugIssue(issue);
+
+        for (Map.Entry<String, String[]> params : ((Map<String, String[]>) request.getParameterMap()).entrySet()) {
+            if (StringUtils.contains(params.getKey(), "quantity.")) {
+                String value = params.getValue()[0].replace(",", "").trim();
+                if (StringUtils.isBlank(value)){
+                    continue;
+                }
+
+                Double quantity = new Double(value);
+                if (quantity <= 0){
+                    continue;
+                }
+
+                Integer key = Integer.parseInt(params.getKey().substring("quantity.".length()));
+                InventoryDrugBatches batch = service.getInventoryDrugBatch(key);
+                InventoryDrugFacility item = batch.getItem();
+
+                InventoryDrugIssuesDetails details = new InventoryDrugIssuesDetails();
+                details.setBatch(batch);
+                details.setIssue(issue);
+                details.setQuantity(quantity);
+                this.service.saveInventoryDrugIssuesDetail(details);
+
+                batch.setAvailable(batch.getAvailable() - quantity);
+                this.service.saveInventoryDrugBatches(batch);
+
+                item.setAvailable(item.getAvailable() - quantity);
+                this.service.saveFacilityDrug(item);
+
+                InventoryDrugTransaction transaction = new InventoryDrugTransaction();
+                transaction.setDate(wrapper.getDate());
+                transaction.setType(new InventoryDrugTransactionType(3));
+                transaction.setItem(item);
+                transaction.setTransaction(issue.getId());
+                transaction.setOpening(item.getAvailable() + quantity);
+                transaction.setIssue(quantity);
+                transaction.setClosing(item.getAvailable());
+                transaction.setDescription("ISSUE TO " + wrapper.getAccount().toUpperCase());
                 this.service.saveInventoryDrugTransaction(transaction);
             }
         }

@@ -10,6 +10,7 @@ public class DrugItemsWrapper {
     private Integer id;
     private Date date;
     private Integer facility;
+    private String account;
     private String supplier;
     private String description;
 
@@ -35,6 +36,14 @@ public class DrugItemsWrapper {
 
     public void setFacility(Integer facility) {
         this.facility = facility;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getSupplier() {

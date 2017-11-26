@@ -41,4 +41,8 @@ public interface MdrtbInventoryService
     InventoryDrugIssues getInventoryDrugIssue(Integer id);
     List<InventoryDrugIssues> getInventoryDrugIssues(List<Location> locations);
     InventoryDrugIssues saveInventoryDrugIssue(InventoryDrugIssues issue);
+
+    InventoryDrugIssuesDetails getInventoryDrugIssuesDetail(Integer id);
+    List<InventoryDrugIssuesDetails> getInventoryDrugIssuesDetails(InventoryDrugIssues issue);
+    InventoryDrugIssuesDetails saveInventoryDrugIssuesDetail(InventoryDrugIssuesDetails details);
 }

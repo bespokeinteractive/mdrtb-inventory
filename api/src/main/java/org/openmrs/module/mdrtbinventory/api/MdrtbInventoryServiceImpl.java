@@ -130,4 +130,19 @@ public class MdrtbInventoryServiceImpl
     public InventoryDrugIssues saveInventoryDrugIssue(InventoryDrugIssues issue) {
         return dao.saveInventoryDrugIssue(issue);
     }
+
+    @Override
+    public InventoryDrugIssuesDetails getInventoryDrugIssuesDetail(Integer id) {
+        return dao.getInventoryDrugIssuesDetail(id);
+    }
+
+    @Override
+    public List<InventoryDrugIssuesDetails> getInventoryDrugIssuesDetails(InventoryDrugIssues issue) {
+        return dao.getInventoryDrugIssuesDetails(issue);
+    }
+
+    @Override
+    public InventoryDrugIssuesDetails saveInventoryDrugIssuesDetail(InventoryDrugIssuesDetails details) {
+        return dao.saveInventoryDrugIssuesDetail(details);
+    }
 }

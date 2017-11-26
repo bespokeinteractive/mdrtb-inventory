@@ -31,12 +31,16 @@
 				getDrugStockList();
 			}
 			else if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'expired'){
-				jq('.add-receipts').show(100);
+				jq('.add-receipts').hide(100);
 				getExpiryStockList();
 			}
 			else if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'receipts'){
 				jq('.add-receipts').show(100);
 				getReceiptsStockList();
+			}
+			else if (jq('#inline-tabs li.ui-tabs-active').attr('aria-controls') == 'accounts'){
+				jq('.add-receipts').hide(100);
+				getIssuesStockList();
 			}
 			else{
 				jq('.add-receipts').hide(100);
@@ -61,11 +65,11 @@
 		jq('.add-receipts').click(function(){
             window.location.href = "addreceipt.page";
 		});
+		
+		jq('.add-issues').click(function(){
+            window.location.href = "addissues.page";
+		});
 	});
-
-
-
-
 </script>
 
 <style>
@@ -281,6 +285,7 @@
 		width: 200px;
 	}
 	#receiptTable,
+	#issuesTable,
 	#expiryTable,
 	#drugstock{
 		font-size: 14px;
@@ -293,6 +298,7 @@
 	}
 	#receiptTable td:first-child,
 	#receiptTable td:last-child,
+	#issuesTable td:last-child,
 	#expiryTable td:last-child,
 	#drugstock td:first-child,
 	#drugstock td:last-child{
@@ -315,6 +321,9 @@
 	}
 	i.icon-plus.small{
 		color: #fff;
+	}
+	td a {
+		cursor: pointer;
 	}
 </style>
 
@@ -383,7 +392,7 @@
             </div>
 			
 			<div id="accounts">
-				${ui.includeFragment("mdrtbinventory", "drugissueaccount")}
+				${ui.includeFragment("mdrtbinventory", "drugissues")}
 			</div>
         </div>
 

@@ -206,4 +206,25 @@ public class HibernateMdrtbInventoryServiceDAO
     public InventoryDrugIssues saveInventoryDrugIssue(InventoryDrugIssues issue) {
         return (InventoryDrugIssues)getSession().merge(issue);
     }
+
+    @Override
+    public InventoryDrugIssuesDetails getInventoryDrugIssuesDetail(Integer id) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugIssuesDetails.class);
+        criteria.add(Restrictions.eq("id", id));
+
+        return (InventoryDrugIssuesDetails) criteria.uniqueResult();
+    }
+
+    @Override
+    public List<InventoryDrugIssuesDetails> getInventoryDrugIssuesDetails(InventoryDrugIssues issue) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugIssuesDetails.class);
+        criteria.add(Restrictions.eq("issue", issue));
+
+        return criteria.list();
+    }
+
+    @Override
+    public InventoryDrugIssuesDetails saveInventoryDrugIssuesDetail(InventoryDrugIssuesDetails details) {
+        return (InventoryDrugIssuesDetails)getSession().merge(details);
+    }
 }
