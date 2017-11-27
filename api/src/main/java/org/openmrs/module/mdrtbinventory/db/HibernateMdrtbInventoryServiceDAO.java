@@ -99,6 +99,17 @@ public class HibernateMdrtbInventoryServiceDAO
     }
 
     @Override
+    public List<InventoryDrugTransaction> getInventoryDrugTransactions(InventoryDrugFacility item) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugTransaction.class);
+        criteria.add(Restrictions.eq("voided", false));
+        criteria.add(Restrictions.eq("item", item));
+        criteria.addOrder(Order.desc("id"));
+        criteria.setMaxResults(50);
+
+        return criteria.list();
+    }
+
+    @Override
     public List<InventoryDrugTransaction> getInventoryDrugTransactions(List<Location> locations, InventoryDrugTransactionType type, Date startDate, Date endDate) {
         Criteria criteria = getSession().createCriteria(InventoryDrugTransaction.class);
         criteria.createAlias("item", "item");

@@ -77,6 +77,11 @@ public class MdrtbInventoryServiceImpl
     }
 
     @Override
+    public List<InventoryDrugTransaction> getInventoryDrugTransactions(InventoryDrugFacility item) {
+        return dao.getInventoryDrugTransactions(item);
+    }
+
+    @Override
     public List<InventoryDrugTransaction> getInventoryDrugTransactions(List<Location> locations, InventoryDrugTransactionType type, Date startDate, Date endDate) {
         return dao.getInventoryDrugTransactions(locations, type, startDate, endDate);
     }

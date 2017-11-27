@@ -27,6 +27,7 @@ public interface MdrtbInventoryService
 
     List<InventoryDrugCategory> getInventoryDrugCategories();
 
+    List<InventoryDrugTransaction> getInventoryDrugTransactions(InventoryDrugFacility item);
     List<InventoryDrugTransaction> getInventoryDrugTransactions(List<Location> locations, InventoryDrugTransactionType type, Date startDate, Date endDate);
     InventoryDrugTransaction saveInventoryDrugTransaction(InventoryDrugTransaction transaction);
 
