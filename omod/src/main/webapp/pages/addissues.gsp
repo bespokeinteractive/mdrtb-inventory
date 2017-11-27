@@ -166,8 +166,6 @@
 					jq().toastmessage('showErrorToast', "Post failed. " + data.statusText);
 				}
 			});
-			
-			alert('here');
 		});
 	});
 </script>

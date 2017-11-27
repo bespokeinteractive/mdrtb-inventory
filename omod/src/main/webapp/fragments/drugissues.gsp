@@ -23,8 +23,8 @@
 		issuesResultsData = results || [];
 		var dataRows = [];
 		_.each(issuesResultsData, function(result){
-			var drug = '<a href="drugs.page?id=' + result.id + '">'+result.account.toUpperCase()+'</a>';
-			var icon = '<a>View</a> | <a>Edit</a> |<a><i class="icon-remove small"></i><a/>';
+			var drug = '<a href="issues.page?id='+result.id+'">'+result.account.toUpperCase()+'</a>';
+			var icon = '<a href="issues.page?id='+result.id+'">View</a> | <a>Edit</a> |<a><i class="icon-remove small"></i><a/>';
 			
 			dataRows.push([0, result.date, drug, result.description.toUpperCase(), icon]);
 		});

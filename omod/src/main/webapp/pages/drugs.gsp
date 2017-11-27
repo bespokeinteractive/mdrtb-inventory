@@ -130,12 +130,7 @@
 <div id="expiry-detail-results" style="display: block; margin-top:3px;">
     <div role="grid" class="dataTables_wrapper" id="expiry-detail-results-table_wrapper">
 		<div id="print-section">
-			<div class="print-only">
-				<center>
-					<img width="100" height="100" align="center" title="Afya EHRS" alt="Afya EHRS" src="${ui.resourceLink('billingui', 'images/kenya_logo.bmp')}">				
-					<h2>{userLocation}</h2>
-				</center>
-				
+			<div class="print-only">				
 				<div>
 					<label>
 						Drug Name:
