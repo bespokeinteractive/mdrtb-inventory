@@ -165,10 +165,15 @@ public class HibernateMdrtbInventoryServiceDAO
     }
 
     @Override
-    public List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item) {
+    public List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item, Date expiry) {
         Criteria criteria = getSession().createCriteria(InventoryDrugBatches.class);
         criteria.add(Restrictions.eq("voided", false));
         criteria.add(Restrictions.eq("item", item));
+
+        if (expiry != null){
+            criteria.add(Restrictions.ge("expiry", expiry));
+
+        }
 
         return criteria.list();
     }
@@ -237,5 +242,23 @@ public class HibernateMdrtbInventoryServiceDAO
     @Override
     public InventoryDrugIssuesDetails saveInventoryDrugIssuesDetail(InventoryDrugIssuesDetails details) {
         return (InventoryDrugIssuesDetails)getSession().merge(details);
+    }
+
+    @Override
+    public InventoryDrugDispense saveInventoryDrugDispense(InventoryDrugDispense dispense) {
+        return (InventoryDrugDispense)getSession().merge(dispense);
+    }
+
+    @Override
+    public InventoryDrugDispenseDetails saveInventoryDrugDispenseDetails(InventoryDrugDispenseDetails details) {
+        return (InventoryDrugDispenseDetails)getSession().merge(details);
+    }
+
+    @Override
+    public List<InventoryDrugDispenseSummary> getInventoryDrugDispenseSummary(InventoryDrugDispense dispense) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugDispenseSummary.class);
+        criteria.add(Restrictions.eq("dispense", dispense));
+
+        return criteria.list();
     }
 }

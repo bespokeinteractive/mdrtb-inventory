@@ -67,7 +67,7 @@ public class DrugsFragmentController {
     public List<SimpleObject> getDrugsBatches(@RequestParam(value = "item") Integer item_id,
                                               UiUtils ui){
         InventoryDrugFacility item = service.getFacilityDrug(item_id);
-        List<InventoryDrugBatches> batches = service.getInventoryDrugBatches(item);
+        List<InventoryDrugBatches> batches = service.getInventoryDrugBatches(item, null);
         if (batches!=null){
             Collections.sort(batches, new Comparator<InventoryDrugBatches>() {
                 @Override

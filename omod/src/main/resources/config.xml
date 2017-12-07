@@ -41,12 +41,15 @@
         InventoryDrugBatches.hbm.xml
         InventoryDrugCategory.hbm.xml
 		InventoryDrugFacility.hbm.xml
-        InventoryDrugFormulation.hbm.xml
-        InventoryDrugTransaction.hbm.xml
-        InventoryDrugTransactionType.hbm.xml
-        InventoryDrugIssues.hbm.xml
-        InventoryDrugIssuesDetails.hbm.xml
-    </mappingFiles>
+		InventoryDrugFormulation.hbm.xml
+		InventoryDrugTransaction.hbm.xml
+		InventoryDrugTransactionType.hbm.xml
+		InventoryDrugIssues.hbm.xml
+		InventoryDrugIssuesDetails.hbm.xml
+		InventoryDrugDispense.hbm.xml
+		InventoryDrugDispenseDetails.hbm.xml
+		InventoryDrugDispenseSummary.hbm.xml
+	</mappingFiles>
 
 	<!-- Internationalization -->
 	<!-- All message codes should start with ${project.parent.artifactId}. -->

@@ -56,7 +56,7 @@ public class MdrtbInventoryServiceImpl
         List<InventoryDrugFacility> items = dao.getFacilityDrugs(locations);
 
         for (int i=0; i<items.size(); i++){
-            List<InventoryDrugBatches> batches = dao.getInventoryDrugBatches(items.get(i));
+            List<InventoryDrugBatches> batches = dao.getInventoryDrugBatches(items.get(i), null);
             items.get(i).setBatches(batches);
             if (batches.size()>0){
                 items.get(i).setHasBatches(true);
@@ -107,8 +107,8 @@ public class MdrtbInventoryServiceImpl
     }
 
     @Override
-    public List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item) {
-        return dao.getInventoryDrugBatches(item);
+    public List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item, Date expiry) {
+        return dao.getInventoryDrugBatches(item, expiry);
     }
 
     @Override
@@ -149,5 +149,20 @@ public class MdrtbInventoryServiceImpl
     @Override
     public InventoryDrugIssuesDetails saveInventoryDrugIssuesDetail(InventoryDrugIssuesDetails details) {
         return dao.saveInventoryDrugIssuesDetail(details);
+    }
+
+    @Override
+    public InventoryDrugDispense saveInventoryDrugDispense(InventoryDrugDispense dispense) {
+        return dao.saveInventoryDrugDispense(dispense);
+    }
+
+    @Override
+    public InventoryDrugDispenseDetails saveInventoryDrugDispenseDetails(InventoryDrugDispenseDetails details) {
+        return dao.saveInventoryDrugDispenseDetails(details);
+    }
+
+    @Override
+    public List<InventoryDrugDispenseSummary> getInventoryDrugDispenseSummary(InventoryDrugDispense dispense) {
+        return dao.getInventoryDrugDispenseSummary(dispense);
     }
 }

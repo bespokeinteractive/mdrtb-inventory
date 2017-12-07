@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.mdrtbinventory">
+	<class name="org.openmrs.module.mdrtbinventory.InventoryDrugDispenseSummary" table="inventory_drug_dispense_summary" batch-size="500">
+		<id name="id" type="java.lang.String" column="id" unsaved-value="0">
+				<generator class="native" />
+		</id>
+
+		<many-to-one name="dispense" class="InventoryDrugDispense" column="dispense_id" cascade="none" lazy="false" />
+		<many-to-one name="item" class="InventoryDrugFacility" column="item_id" cascade="none" lazy="false" />
+
+        <property name="quantity" column="quantity" type="java.lang.Double" />
+    </class>
+</hibernate-mapping>

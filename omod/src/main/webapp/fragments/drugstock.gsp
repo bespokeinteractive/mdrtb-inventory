@@ -118,7 +118,7 @@
 		<th style="width:1px">#</th>
 		<th>DRUG NAME</th>
 		<th style="width:180px;">CATEGORY</th>
-		<th style="width:120px;">FORMULATION</th>
+		<th style="width:140px;">FORMULATION</th>
 		<th style="width:80px">QUANTITY</th>
 		<th style="width:80px">REORDER</th>
 		<th style="width:80px">ACTIONS</th>

@@ -147,11 +147,14 @@
     .newdtp {
         width: 166px;
     }
+	
+	.add-on {
+		font-size: 8px !important;
+	}
 
-    .add-on {
+    .firefox .add-on {
         color: #f26522;
 		float: right;
-		font-size: 8px !important;
 		left: auto;
 		margin-left: -29px;
 		margin-top: 8px !important;
@@ -161,12 +164,6 @@
         color: #f26522!important;
 		font-size: 2.5em!important;
 	}
-
-    .chrome .add-on {
-        margin-left: -31px;
-        margin-top: -27px !important;
-        position: relative !important;
-    }
 	
     .ui-widget-content a {
         color: #007fff;

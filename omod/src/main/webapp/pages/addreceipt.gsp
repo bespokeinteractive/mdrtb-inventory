@@ -1,6 +1,7 @@
 <%
     ui.decorateWith("appui", "standardEmrPage", [title: "Add Receipts"])
 	ui.includeJavascript("mdrtbdashboard", "moment.js")
+	ui.includeJavascript("mdrtbdashboard", "jq.browser.select.js")
 %>
 
 <script>
@@ -235,7 +236,7 @@
 
     .chrome td .add-on {
         margin-left: -31px;
-        margin-top: -27px !important;
+        margin-top: -19px !important;
         position: relative !important;
     }
 	
@@ -327,16 +328,16 @@
 				<tr>
 					<td>${index+1}</td>
 					<td>${item.drug.name.toUpperCase()} (${item.formulation.name.toUpperCase()} ${item.formulation.dosage.toUpperCase()})</td>
-					<td class="textable"><input type="text" class="child" data-uuid="${item.id}" name="batch.${item.id}" id="batch${item.id}" /></td>
-					<td class="textable"><input type="text" class="child" data-uuid="${item.id}" name="company.${item.id}" id="company${item.id}" /></td>
-					<td class="textable qt"><input type="text" class="child" data-uuid="${item.id}" name="quantity.${item.id}" id="quantity${item.id}" /></td>
-					<td class="textable">
+					<td class="textable" style="width:80px"><input type="text" class="child" data-uuid="${item.id}" name="batch.${item.id}" id="batch${item.id}" /></td>
+					<td class="textable" style="width:120px"><input type="text" class="child" data-uuid="${item.id}" name="company.${item.id}" id="company${item.id}" /></td>
+					<td class="textable qt" style="width:70px"><input type="text" class="child" data-uuid="${item.id}" name="quantity.${item.id}" id="quantity${item.id}" /></td>
+					<td class="textable" style="width:100px">
 						${ui.includeFragment("uicommons", "field/datetimepicker", [formFieldName: 'manufacture.'+item.id, id: 'manf'+item.id, label: '', useTime: false, defaultToday: false, classes:['mandatory']])}
 					</td>
-					<td class="textable">
+					<td class="textable" style="width:100px">
 						${ui.includeFragment("uicommons", "field/datetimepicker", [formFieldName: 'expiry.'+item.id, id: 'expr'+item.id, label: '', useTime: false, defaultToday: false, classes:['mandatory']])}
 					</td>
-					<td class="textable"><input type="text" class="child" data-uuid="${item.id}" name="comment.${item.id}"/></td>
+					<td class="textable" style="width:150px"><input type="text" class="child" data-uuid="${item.id}" name="comment.${item.id}"/></td>
 				</tr>
 			<% } %>
 		</tbody>

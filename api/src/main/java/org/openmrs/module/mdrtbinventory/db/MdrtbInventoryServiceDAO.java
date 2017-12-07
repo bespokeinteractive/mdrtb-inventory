@@ -30,7 +30,7 @@ public interface MdrtbInventoryServiceDAO {
 
     InventoryDrugBatches getInventoryDrugBatch(Integer id);
     InventoryDrugBatches getInventoryDrugBatch(InventoryDrugFacility item, String batch, String company);
-    List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item);
+    List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item, Date expiry);
     List<InventoryDrugBatches> getExpiredBatches(List<Location> locations, Boolean indented);
     InventoryDrugBatches saveInventoryDrugBatches(InventoryDrugBatches batch);
 
@@ -41,4 +41,10 @@ public interface MdrtbInventoryServiceDAO {
     InventoryDrugIssuesDetails getInventoryDrugIssuesDetail(Integer id);
     List<InventoryDrugIssuesDetails> getInventoryDrugIssuesDetails(InventoryDrugIssues issue);
     InventoryDrugIssuesDetails saveInventoryDrugIssuesDetail(InventoryDrugIssuesDetails details);
+
+    InventoryDrugDispense saveInventoryDrugDispense(InventoryDrugDispense dispense);
+
+    InventoryDrugDispenseDetails saveInventoryDrugDispenseDetails(InventoryDrugDispenseDetails details);
+
+    List<InventoryDrugDispenseSummary> getInventoryDrugDispenseSummary(InventoryDrugDispense dispense);
 }
