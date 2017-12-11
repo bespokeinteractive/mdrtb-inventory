@@ -1,5 +1,6 @@
 package org.openmrs.module.mdrtbinventory;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.openmrs.Location;
 import org.openmrs.User;
 import org.openmrs.api.context.Context;
@@ -34,6 +35,9 @@ public class InventoryDrugBatches
     private Date voidedOn;
     private User voidedBy;
     private String voidReason;
+
+    //None Persistent Objects
+    private Boolean expired;
 
     public InventoryDrugBatches(){
         this.voided = false;
@@ -194,5 +198,20 @@ public class InventoryDrugBatches
 
     public void setVoidReason(String voidReason) {
         this.voidReason = voidReason;
+    }
+
+    public Boolean getExpired() {
+        if (this.expiry.before(new Date())){
+            expired = true;
+        }
+        else {
+            expired = false;
+        }
+
+        return expired;
+    }
+
+    public void setExpired(Boolean expired) {
+        this.expired = expired;
     }
 }

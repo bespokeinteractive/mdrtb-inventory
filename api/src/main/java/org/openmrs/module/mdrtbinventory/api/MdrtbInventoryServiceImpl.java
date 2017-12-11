@@ -117,6 +117,11 @@ public class MdrtbInventoryServiceImpl
     }
 
     @Override
+    public List<InventoryDrugBatches> getShortExpiryBatches(List<Location> locations, Date expireBy) {
+        return dao.getShortExpiryBatches(locations, expireBy);
+    }
+
+    @Override
     public InventoryDrugBatches saveInventoryDrugBatches(InventoryDrugBatches batch) {
         return dao.saveInventoryDrugBatches(batch);
     }
@@ -157,8 +162,28 @@ public class MdrtbInventoryServiceImpl
     }
 
     @Override
+    public InventoryDrugDispense getInventoryDrugDispense(Integer id) {
+        return dao.getInventoryDrugDispense(id);
+    }
+
+    @Override
+    public List<InventoryDrugDispense> getInventoryDrugDispense(Location location) {
+        return dao.getInventoryDrugDispense(location);
+    }
+
+    @Override
     public InventoryDrugDispenseDetails saveInventoryDrugDispenseDetails(InventoryDrugDispenseDetails details) {
         return dao.saveInventoryDrugDispenseDetails(details);
+    }
+
+    @Override
+    public List<InventoryDrugDispenseDetailsTbSummary> getInventoryDrugDispenseDetailsTbSummary(InventoryDrugDispense dispense) {
+        return dao.getInventoryDrugDispenseDetailsTbSummary(dispense);
+    }
+
+    @Override
+    public List<InventoryDrugDispenseDetailsTbSummaryPatients> getInventoryDrugDispenseDetailsTbSummaryPatients(Location location, String period) {
+        return dao.getInventoryDrugDispenseDetailsTbSummaryPatients(location, period);
     }
 
     @Override

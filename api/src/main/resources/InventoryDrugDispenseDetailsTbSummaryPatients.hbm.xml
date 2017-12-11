@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.mdrtbinventory">
+	<class name="org.openmrs.module.mdrtbinventory.InventoryDrugDispenseDetailsTbSummaryPatients" table="inventory_drug_dispense_details_tb_summary_pt" batch-size="500">
+		<id name="id" type="java.lang.String" column="id" unsaved-value="0">
+				<generator class="native" />
+		</id>
+
+        <property name="period" column="period" type="java.lang.String" />
+
+		<many-to-one name="location" class="org.openmrs.Location" column="location_id" cascade="none" lazy="false" />
+		<many-to-one name="programDetails" class="org.openmrs.module.mdrtb.model.PatientProgramDetails" column="pp" cascade="none" lazy="false" />
+
+        <property name="rhze" column="rhze" type="java.lang.Double" />
+        <property name="rh" column="rh" type="java.lang.Double" />
+        <property name="rhz" column="rhz" type="java.lang.Double" />
+        <property name="rhp" column="rhp" type="java.lang.Double" />
+        <property name="eth" column="etha" type="java.lang.Double" />
+        <property name="iso" column="iso" type="java.lang.Double" />
+    </class>
+</hibernate-mapping>

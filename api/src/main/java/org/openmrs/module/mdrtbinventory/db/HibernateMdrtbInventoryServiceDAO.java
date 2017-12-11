@@ -197,6 +197,22 @@ public class HibernateMdrtbInventoryServiceDAO
     }
 
     @Override
+    public List<InventoryDrugBatches> getShortExpiryBatches(List<Location> locations, Date expireBy) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugBatches.class);
+        criteria.createAlias("item", "item");
+        criteria.add(Restrictions.eq("voided", false));
+        criteria.add(Restrictions.le("expiry", expireBy));
+        criteria.add(Restrictions.in("item.location", locations));
+        // criteria.add(Restrictions.gt("available", 0));
+        criteria.add(Restrictions.isNull("indentedOn"));
+
+        criteria.addOrder(Order.desc("expiry"));
+
+
+        return criteria.list();
+    }
+
+    @Override
     public InventoryDrugBatches saveInventoryDrugBatches(InventoryDrugBatches batch) {
         return (InventoryDrugBatches)getSession().merge(batch);
     }
@@ -250,8 +266,45 @@ public class HibernateMdrtbInventoryServiceDAO
     }
 
     @Override
+    public InventoryDrugDispense getInventoryDrugDispense(Integer id) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugDispense.class);
+        criteria.add(Restrictions.eq("id", id));
+        return (InventoryDrugDispense) criteria.uniqueResult();
+    }
+
+    @Override
+    public List<InventoryDrugDispense> getInventoryDrugDispense(Location location) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugDispense.class);
+        criteria.add(Restrictions.eq("voided", false));
+        criteria.add(Restrictions.eq("location", location));
+        criteria.addOrder(Order.desc("date"));
+
+        return criteria.list();
+    }
+
+    @Override
     public InventoryDrugDispenseDetails saveInventoryDrugDispenseDetails(InventoryDrugDispenseDetails details) {
         return (InventoryDrugDispenseDetails)getSession().merge(details);
+    }
+
+    @Override
+    public List<InventoryDrugDispenseDetailsTbSummary> getInventoryDrugDispenseDetailsTbSummary(InventoryDrugDispense dispense) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugDispenseDetailsTbSummary.class);
+        criteria.add(Restrictions.eq("dispense", dispense));
+
+        return criteria.list();
+    }
+
+    @Override
+    public List<InventoryDrugDispenseDetailsTbSummaryPatients> getInventoryDrugDispenseDetailsTbSummaryPatients(Location location, String period) {
+        Criteria criteria = getSession().createCriteria(InventoryDrugDispenseDetailsTbSummaryPatients.class);
+        criteria.add(Restrictions.eq("location", location));
+
+        if (period != null){
+            criteria.add(Restrictions.eq("period", period));
+        }
+
+        return criteria.list();
     }
 
     @Override

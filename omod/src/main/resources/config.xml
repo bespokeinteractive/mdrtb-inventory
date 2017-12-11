@@ -48,6 +48,8 @@
 		InventoryDrugIssuesDetails.hbm.xml
 		InventoryDrugDispense.hbm.xml
 		InventoryDrugDispenseDetails.hbm.xml
+		InventoryDrugDispenseDetailsTbSummary.hbm.xml
+		InventoryDrugDispenseDetailsTbSummaryPatients.hbm.xml
 		InventoryDrugDispenseSummary.hbm.xml
 	</mappingFiles>
 

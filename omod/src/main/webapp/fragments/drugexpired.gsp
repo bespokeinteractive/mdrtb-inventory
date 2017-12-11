@@ -114,14 +114,15 @@
 
 <table id="expiryTable">
     <thead>
-    <th style="width:1px">#</th>
-    <th>DRUG NAME</th>
-    <th style="width:150px;">CATEGORY</th>
-    <th style="width:80px;">BATCH#</th>
-    <th style="width:80px;">EXPIRY</th>
-    <th style="width:80px">QUANTITY</th>
-    <th style="width:100px">ACTIONS</th>
+	    <th style="width:1px">#</th>
+	    <th>DRUG NAME</th>
+	    <th style="width:150px;">CATEGORY</th>
+	    <th style="width:80px;">BATCH#</th>
+	    <th style="width:80px;">EXPIRY</th>
+	    <th style="width:80px">QUANTITY</th>
+	    <th style="width:100px">ACTIONS</th>
     </thead>
+	
     <tbody>
     </tbody>
 </table>

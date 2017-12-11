@@ -37,6 +37,7 @@ public interface MdrtbInventoryService
     InventoryDrugBatches getInventoryDrugBatch(InventoryDrugFacility item, String batch, String company);
     List<InventoryDrugBatches> getInventoryDrugBatches(InventoryDrugFacility item, Date expiry);
     List<InventoryDrugBatches> getExpiredBatches(List<Location> locations, Boolean indented);
+    List<InventoryDrugBatches> getShortExpiryBatches(List<Location> locations, Date ExpireBy);
     InventoryDrugBatches saveInventoryDrugBatches(InventoryDrugBatches batch);
 
     InventoryDrugIssues getInventoryDrugIssue(Integer id);
@@ -48,8 +49,12 @@ public interface MdrtbInventoryService
     InventoryDrugIssuesDetails saveInventoryDrugIssuesDetail(InventoryDrugIssuesDetails details);
 
     InventoryDrugDispense saveInventoryDrugDispense(InventoryDrugDispense dispense);
+    InventoryDrugDispense getInventoryDrugDispense(Integer id);
+    List<InventoryDrugDispense> getInventoryDrugDispense(Location location);
 
     InventoryDrugDispenseDetails saveInventoryDrugDispenseDetails(InventoryDrugDispenseDetails details);
+    List<InventoryDrugDispenseDetailsTbSummary> getInventoryDrugDispenseDetailsTbSummary(InventoryDrugDispense dispense);
+    List<InventoryDrugDispenseDetailsTbSummaryPatients> getInventoryDrugDispenseDetailsTbSummaryPatients(Location location, String period);
 
     List<InventoryDrugDispenseSummary> getInventoryDrugDispenseSummary(InventoryDrugDispense dispense);
 }
